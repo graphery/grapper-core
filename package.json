@@ -16,6 +16,7 @@
     "test": "concurrently -m 1 npm:test:*",
     "test:core": "playwright test test/core/index.test.js --project=core",
     "test:core.intersection": "playwright test test/core.intersection/index.test.js --project=core.intersection",
+    "test:helpers": "playwright test ./test/helpers/ --project=helpers",
     "build:module:core": "g-packer -l module:core -m ./src/core/index.js ./dist/module/core/index.js ./package.json",
     "update:playwright": "npx playwright install",
     "publish" : "node ./tools/npm-helpers/publish.js"
