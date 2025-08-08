@@ -1,12 +1,12 @@
 {
   "name": "grapper-core",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "description": "Core libs and helpers for Grapper projects",
   "author": "Graphery",
   "bugs": "https://github.com/graphery/grapper-core/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/graphery/grappe-corer.git"
+    "url": "git+https://github.com/graphery/grapper-core.git"
   },
   "type": "module",
   "license": "MIT",
