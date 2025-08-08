@@ -76,7 +76,7 @@ try {
 
   // Clean up temp directory and cache file
   try {
-    // fs.rmSync(tmpDir, {recursive : true, force : true});
+    fs.rmSync(tmpDir, {recursive : true, force : true});
     if (fs.existsSync(backupPath)) {
       fs.cpSync(backupPath, pkgPath);
       fs.rmSync(backupPath, {force : true});
