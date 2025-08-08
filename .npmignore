@@ -1,0 +1,8 @@
+.idea
+package.json.backup
+playwright.config.js
+dist/
+test/
+test-results/
+tools/playwright-helper/
+tools/npm-helpers/publish.js
