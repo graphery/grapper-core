@@ -1,0 +1,36 @@
+{
+  "name": "grapper-core",
+  "version": "1.0.0-beta.1",
+  "description": "Core libs and helpers for Grapper projects",
+  "author": "Graphery",
+  "bugs": "https://github.com/graphery/grapper-core/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graphery/grappe-corer.git"
+  },
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "workbench:core": "g-workbench -l core -t test/core/cases -p 8001",
+    "workbench:core.intersection": "g-workbench -l core.viewport -t test/core.intersection/cases -p 8002",
+    "test": "concurrently -m 1 npm:test:*",
+    "test:core": "playwright test test/core/index.test.js --project=core",
+    "test:core.intersection": "playwright test test/core.intersection/index.test.js --project=core.intersection",
+    "build:module:core": "g-packer -l module:core -m ./src/core/index.js ./dist/module/core/index.js ./package.json",
+    "update:playwright": "npx playwright install",
+    "publish" : "node ./tools/npm-helpers/publish.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.2",
+    "concurrently": "^9.2.0",
+    "playwright": "^1.54.2",
+    "grapper-workbench": "^0.0.3",
+    "grapper-packer": "^0.0.3"
+  },
+  "keywords": [
+    "web-component",
+    "helpers",
+    "graphery",
+    "grapper"
+  ]
+}

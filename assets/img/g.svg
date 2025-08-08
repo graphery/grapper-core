@@ -1,0 +1,7 @@
+<svg id="grapper" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 350 350" width="60" height="60">
+  <g>
+    <polyline points="212.6 98.9 188.7 57.4 113.1 57.4 75.4 122.8 113.1 188.3 188.7 188.3 212.6 146.8" fill="none" stroke="#fe5140" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"/>
+    <polyline points="222.8 253.7 270.4 253.7 308.2 188.3 270.4 122.8 194.9 122.8 175.3 156.7" fill="none" stroke="#20ae66" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"/>
+    <polyline points="83.4 185.9 59.6 227.2 97.4 292.6 173 292.6 210.7 227.2 200.4 209.3" fill="none" stroke="#4089c4" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"/>
+  </g>
+</svg>
