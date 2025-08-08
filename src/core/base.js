@@ -16,10 +16,10 @@ import {
 } from './simple.js';
 import {
   isUndefined, isFunction
-} from '../helpers/types.js';
+} from './helpers/types.js';
 import {
   debounceMethodAsync, posExecution, preCondition
-} from '../helpers/functions.js';
+} from './helpers/functions.js';
 
 // Constants
 const DELAY = 1;

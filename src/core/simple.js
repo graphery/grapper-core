@@ -10,11 +10,11 @@
 import {
   str2value, toCamel, isUndefined, isFunction, isObject, isString, isNull,
   NUMBER, BOOLEAN, OBJECT, ARRAY, EMPTY_STRING,
-}                     from '../helpers/types.js';
-import objectObserver from '../helpers/object.observer.js';
+}                     from './helpers/types.js';
+import objectObserver from './helpers/object.observer.js';
 import {
   equal, clone
-}                     from '../helpers/objects.js';
+}                     from './helpers/objects.js';
 
 // Public symbols
 /**

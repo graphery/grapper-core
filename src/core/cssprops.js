@@ -1,5 +1,5 @@
 import { CSS_PROPS }             from './base.js';
-import { isUndefined, isObject } from "../helpers/types.js";
+import { isUndefined, isObject } from "./helpers/types.js";
 
 const buildName = (name) => name.startsWith('--') ? name : `--${ name }`;
 

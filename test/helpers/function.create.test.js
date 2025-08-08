@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 import {
   createFunction,
   getFunctions
-} from '../../src/helpers/function.create.js';
+} from '../../src/core/helpers/function.create.js';
 
 const name = 'lib.function.create';
 

@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 import {
   operations
-} from '../../src/helpers/array.operations.js';
+} from '../../src/core/helpers/array.operations.js';
 
 const name = 'lib.array.operations';
 

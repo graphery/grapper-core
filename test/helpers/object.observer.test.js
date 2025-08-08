@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 import {
   objectObserver
-} from '../../src/helpers/object.observer.js';
+} from '../../src/core/helpers/object.observer.js';
 
 const name = 'lib.object.observe';
 

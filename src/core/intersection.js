@@ -1,6 +1,6 @@
 import { CONTEXT, FIRE_EVENT } from "./base.js";
-import { STRING, NUMBER }      from '../helpers/types.js';
-import intersection            from "../helpers/intersection.js";
+import { STRING, NUMBER }      from './helpers/types.js';
+import intersection            from "./helpers/intersection.js";
 
 const OBSERVER = Symbol();
 

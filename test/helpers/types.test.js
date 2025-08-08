@@ -4,7 +4,7 @@ import {
   isObject, isString, isFunction, isNumber, isUndefined, isSymbol, isBoolean, isArray, isDate,
   isNull, array2attribute, attribute2array, attribute2arrayObject, attribute2object,
   object2attribute, str2value, isLikeArray, isLikeObject, csvStr2obj, jsStr2obj
-} from '../../src/helpers/types.js';
+} from '../../src/core/helpers/types.js';
 
 const name = 'lib.types';
 

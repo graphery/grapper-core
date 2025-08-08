@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 import {
   createOther, clone, walker, getProperty, Schema, equal
-} from '../../src/helpers/objects.js';
+} from '../../src/core/helpers/objects.js';
 
 const name = 'lib.object';
 
