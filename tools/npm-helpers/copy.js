@@ -4,25 +4,23 @@ import path from 'path';
 
 const projectRoot = process.env.INIT_CWD;
 
-const srcCoreDest    = path.join(projectRoot, 'src', 'core');
-const srcHelpersDest = path.join(projectRoot, 'src', 'helpers');
+const srcCoreDest = path.join(projectRoot, 'src', 'core');
 
-const moduleCoreSrc    = path.join(projectRoot, 'node_modules', 'grapper-core', 'src', 'core');
-const moduleHelpersSrc = path.join(projectRoot, 'node_modules', 'grapper-core', 'src', 'helpers');
+const moduleCoreSrc = path.join(projectRoot, 'node_modules', 'grapper-core', 'src', 'core');
+
+// Remove directories
+if (fs.existsSync(srcCoreDest)) {
+  fs.rmdirSync(srcCoreDest, {recursive : true});
+}
 
 // Create directories
 fs.mkdirSync(srcCoreDest, {recursive : true});
-fs.mkdirSync(srcHelpersDest, {recursive : true});
 
 // Copy files
 fs.cpSync(moduleCoreSrc, srcCoreDest, {recursive : true});
-fs.cpSync(moduleHelpersSrc, srcHelpersDest, {recursive : true});
 
 // Add to .gitignore
-add2gitignore([
-  '/src/core/',
-  '/src/helpers/',
-]);
+add2gitignore(['/src/core/']);
 
 function add2gitignore (patterns) {
 
