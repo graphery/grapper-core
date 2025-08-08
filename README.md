@@ -1,4 +1,4 @@
-![grapper](./assets/img/grapper.svg)
+![grapper](./assets/img/grapper.png)
 
 # grapper-core
 
