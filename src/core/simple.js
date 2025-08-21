@@ -491,6 +491,10 @@ function define (Class, def = {}) {
     registreComponent(Class, name);
     return def;
   };
+  def.alias       = (name) => {
+    registreComponent(class extends Class {}, name);
+    return def;
+  };
   def.extension = def.ext = (fn) => {
     fn.call(def, def, Class)
     return def

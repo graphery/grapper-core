@@ -97,6 +97,12 @@ for await (const dirent of dir) {
         await expect(content).toContainText('connected!')
       });
     }
-
+    if (['case15'].includes(code)) {
+      test('compare all components', async ({page}) => {
+        await wait(3000);
+        const component = page.locator('#container');
+        await expect(component).toHaveScreenshot();
+      });
+    }
   });
 }

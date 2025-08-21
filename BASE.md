@@ -53,10 +53,11 @@ define(MyComponent)
   .tag('my-component');
 ```
 
-As a result of executing this code, we can use a new component of Grapper with the
-name `g-my-component`:
+As a result of executing this code, we can use a new component of Grapper with the name
+`g-my-component`:
 
 ```html
+
 <g-my-component></g-my-component>
 ```
 
@@ -64,9 +65,6 @@ In this example, we have inserted a simple ellipse with an SVG tag, but Grapper 
 content to create their graphics, from HTML, to Canvas, passing by the SVG format. Any content
 supported by modern browsers can be inserted inside the Shadow DOM of the component, even other web
 components.
-
-**Note*: all components of Grapper beginning with `g-`. This prefix is not must be passed to the
-function `define().tag()`.
 
 ## Component life cycle
 
@@ -147,6 +145,7 @@ by which it is happening. In particular, emit the events:
 <!-- case03 -->
 
 ```html
+
 <g-my-new-component id="component"></g-my-new-component>
 <pre id="result"></pre>
 <script type="module">
@@ -238,10 +237,9 @@ the name `.label`. Any change in the attribute will be reflected in the property
 property only updates the attribute if it has been created explicitly.
 
 An important element in defining the attributes is `posUpdate`. This key allows you to define, that
-occurs after you change the value of this attribute. In the above example we have
-indicated `REFRESH`, that is to say, that will be called update method of the component. You can
-also include `RENDER` for to force the full display of the component, for example, by a change of
-settings.
+occurs after you change the value of this attribute. In the above example we have indicated
+`REFRESH`, that is to say, that will be called update method of the component. You can also include
+`RENDER` for to force the full display of the component, for example, by a change of settings.
 
 **Note**: if the name of the attribute has hyphen (`-`) the name of theproperty will be configured
 in the format *lowerCamelCase*, that is to say, `my-data` will property mirror `.myData`.
@@ -252,6 +250,7 @@ launches the event `refresh` automatically.
 <!-- case04 -->
 
 ```html
+
 <g-my-component id="component"></g-my-component>
 <p>click: change the label by property</p>
 <p>right click: change the label by attribute</p>
@@ -300,11 +299,11 @@ launches the event `refresh` automatically.
 ```
 
 The attributes can be of type `boolean` (appear or not in the component), contain data of a basic
-type (`string`, `number`) or to handle two complex types managed directly by the
-class `Base` (`array` and `object`):
+type (`string`, `number`) or to handle two complex types managed directly by the class `Base` (
+`array` and `object`):
 
-- `array` or **Lists of values**, expressed as comma-separated values in the attribute (for
-  example, `attr="a, b, c, d"`), which are converted into a
+- `array` or **Lists of values**, expressed as comma-separated values in the attribute (for example,
+  `attr="a, b, c, d"`), which are converted into a
   `Array` in the property (for example, `["a", "b", "b", "d"]`) and vice versa.
 
 - `object` or **Format key:value**, is similar to the format of the attribute
@@ -313,15 +312,15 @@ class `Base` (`array` and `object`):
   Peter; age: 30;"` will become `{name: "Peter", age : 30}`, and vice versa. These objects may not
   be nested, and only accepted properties in the first level.
 
-For more information about the options for creating attributes, see the reference
-about [`attributeDescriptor`](#attributedescriptor-object)
+For more information about the options for creating attributes, see the reference about [
+`attributeDescriptor`](#attributedescriptor-object)
 
 ## Properties without attribute mirror
 
 In some cases, we want to define properties without an attribute mirror. In these cases we can use
 the usual mechanisms of the Javascript to create properties (with getter/setter or the constructor
-with `this`), but `Base` offers us the function `define().prop()` which operates in a manner
-very similar to
+with `this`), but `Base` offers us the function `define().prop()` which operates in a manner very
+similar to
 `define().attr()` and that simplifies quite this operation.
 
 <!-- case05.html -->
@@ -331,8 +330,8 @@ define(MyComponent)
   .prop({name : 'value', type : 'number', value : 0, posUpdate : REFRESH});
 ```
 
-For more information about the options for creating properties, see the reference
-about [`define().prop()`](#defineklasspropertypropertydescriptor-function)
+For more information about the options for creating properties, see the reference about [
+`define().prop()`](#defineklasspropertypropertydescriptor-function)
 
 ## Private information
 
@@ -345,6 +344,7 @@ component.
 <!-- cas06 -->
 
 ```html
+
 <g-my-component id="component" value="10"></g-my-component>
 <p>click: add 1 to value</p>
 
@@ -391,12 +391,13 @@ In some cases, the configuration of the component can be complex, and the attrib
 sufficient to declarative configure the behavior. In these cases, it is useful to use the Local DOM
 as a mechanism for providing information and configuration to the component.
 
-In the first place, we can use the usual mechanisms of management of the local DOM,
-like `<slots></slot>`, with and without name, or the methods to handle the content of the local DOM.
+In the first place, we can use the usual mechanisms of management of the local DOM, like
+`<slots></slot>`, with and without name, or the methods to handle the content of the local DOM.
 
 <!-- case07 -->
 
 ```html
+
 <g-my-component id="component">
   <label><strong><em>Number</em>:</strong> <span id="num">0</span></label>
 </g-my-component>
@@ -449,6 +450,7 @@ invoked every time when is changed the local DOM content.
 <!-- case08 -->
 
 ```html
+
 <g-my-component id="component">
   <label><strong><em>Number</em>:</strong> <span id="num">0</span></label>
 </g-my-component>
@@ -504,6 +506,7 @@ changed.
 <!-- case09 -->
 
 ```html
+
 <div style="height: 300px; width: 300px; resize:both; overflow: hidden; border: 1px dotted black">
   <g-my-component style="width: 100%; height: auto;" id="component" label="Hello"></g-my-component>
 </div>
@@ -562,6 +565,7 @@ and use these functions:
 <!-- case10 -->
 
 ```html
+
 <g-my-component id="component"></g-my-component>
 <p>
   <button id="check">get CSS properties</button>
@@ -609,8 +613,8 @@ and use these functions:
 
 The user can define `--g-bg-color` as a CSS variable to define the component background color.
 
-**Note**: the `--g-` prefix is included automatically when a CSS custom property is defined
-by `.style()`.
+**Note**: the `--g-` prefix is included automatically when a CSS custom property is defined by
+`.style()`.
 
 ## Manages advanced life cycle
 
@@ -630,6 +634,7 @@ from a remote server.
 <!-- case11 -->
 
 ```html
+
 <g-my-component delay="4"></g-my-component>
 
 <script type="module">
@@ -678,12 +683,13 @@ In some cases, we need to create a Web Component without a user interface. In th
 class is too big, and we can use `Simple`, a very small Web Component class without life cicle and
 other features related with the user interface.
 
-You can use `define().attr()`, `define().prop()` and `define().tag()` with classes inherit
-from `Simple`, but you cannot use ~~`define().style()`~~.
+You can use `define().attr()`, `define().prop()` and `define().tag()` with classes inherit from
+`Simple`, but you cannot use ~~`define().style()`~~.
 
 <!-- case12 -->
 
 ```html
+
 <g-my-component href="#content"></g-my-component>
 <button onclick="document.querySelector('g-my-component').delay=1">load</button>
 <div id="content"></div>
@@ -854,7 +860,7 @@ class X extends Base {
   constructor () {
     super();
     this[ONCONNECT].push(() => {
-      /* ... */  
+      /* ... */
     });
   }
 }
@@ -871,7 +877,7 @@ class X extends Base {
   constructor () {
     super();
     this[ONDISCONNECT].push(() => {
-      /* ... */  
+      /* ... */
     });
   }
 }
@@ -975,11 +981,11 @@ Return a `define object` for method chaining.
 
 ##### define(klass).tag(name) :`function`
 
-You define a Custom Component
+It defines a Custom Component.
 
-| Param  | Type     | Description                          |
-|:-------|:---------|:-------------------------------------|
-| `name` | `string` | Custom tag name, without `g-` prefix |
+| Param  | Type     | Description     |
+|:-------|:---------|:----------------|
+| `name` | `string` | Custom tag name |
 
 ```js
 import { Base, define } from './/base.js';
@@ -988,7 +994,28 @@ class X extends Base {
 }
 
 define(X)
-  .tag('tagname');
+  .tag('tag-name');
+```
+
+Return a `define object` for method chaining.
+
+##### define(klass).alias(name) :`function`
+
+It defines a Custom Component alias.
+
+| Param  | Type     | Description     |
+|:-------|:---------|:----------------|
+| `name` | `string` | Custom tag name |
+
+```js
+import { Base, define } from './/base.js';
+
+class X extends Base {
+}
+
+define(X)
+  .tag('tag-name')
+  .alias('alias-name');
 ```
 
 Return a `define object` for method chaining.
@@ -1023,7 +1050,6 @@ class X extends Simple {
 
 **Definition**
 
-`define()`, `define().attr()`, `define().prop()`, `define().tag()` work with `Simple` class
-too.
+`define()`, `define().attr()`, `define().prop()`, `define().tag()` work with `Simple` class too.
 
 ./
