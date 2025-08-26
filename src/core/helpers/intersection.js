@@ -2,13 +2,17 @@ const EVENT_IN  = 'intersection.enter';
 const EVENT_OUT = 'intersection.exit';
 const OBSERVER  = Symbol();
 
-
 // intersection
 export function intersection (ratio) {
-  const event = (kind) => this.dispatchEvent(new CustomEvent(
-    kind,
-    {bubbles : true, cancelable : true, composed : true}
-  ));
+  const event     = (kind) => {
+    setTimeout(() =>
+      (this.svg?._el || this).dispatchEvent(new CustomEvent(
+          kind,
+          {bubbles : true, cancelable : true, composed : true}
+        )
+      ), 50);
+  }
+  let initial     = true;
   let intersected = false;
   if (this[OBSERVER]) {
     this[OBSERVER].disconnect();
@@ -21,10 +25,13 @@ export function intersection (ratio) {
           event(EVENT_IN);
         }
       } else {
-        intersected = false;
-        event(EVENT_OUT);
+        if (intersected || initial) {
+          intersected = false;
+          event(EVENT_OUT);
+        }
       }
     });
+    initial = false;
   }, {
     "root"       : null,
     "rootMargin" : "0px",

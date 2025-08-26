@@ -2,8 +2,8 @@ export const title       = '8) update intersectionRatio'
 export const description = `Display an circle into a overflow div`;
 
 export async function script () {
-  const {Base, RENDER, define} = await import('/src/core/base.js');
-  const {intersectionCoreExtension}         = await import('/src/core/intersection.js');
+  const {Base, RENDER, define}      = await import('/src/core/base.js');
+  const {intersectionCoreExtension} = await import('/src/core/intersection.js');
 
   class MyComponent extends Base {
 
@@ -19,7 +19,8 @@ export async function script () {
           <rect x="14" y="14" width="72" height="72"/> 
         </svg>`;
     }
-    get svg() {
+
+    get svg () {
       return this.shadowRoot.querySelector('svg');
     }
   }
