@@ -6,7 +6,7 @@ const OBSERVER  = Symbol();
 export function intersection (ratio) {
   const event     = (kind) => {
     setTimeout(() =>
-      (this.svg?._el || this).dispatchEvent(new CustomEvent(
+      (this._el || this.svg?._el || this).dispatchEvent(new CustomEvent(
           kind,
           {bubbles : true, cancelable : true, composed : true}
         )
