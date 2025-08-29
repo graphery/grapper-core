@@ -1,12 +1,14 @@
 // copy.js
-import fs   from 'fs';
-import path from 'path';
+import fs                from 'fs';
+import path              from 'path';
+import { fileURLToPath } from 'url';
 
-const projectRoot = process.env.INIT_CWD;
-
-const srcCoreDest = path.join(projectRoot, 'src', 'core');
-
-const moduleCoreSrc = path.join(projectRoot, 'node_modules', 'grapper-core', 'src', 'core');
+const projectRoot   = process.env.INIT_CWD ||
+                      process.cwd();
+const srcCoreDest   = path.join(projectRoot, 'src', 'core');
+const __filename    = fileURLToPath(import.meta.url);
+const __dirname     = path.dirname(__filename);
+const moduleCoreSrc = path.resolve(__dirname, '../../src/core');
 
 // Remove directories
 if (fs.existsSync(srcCoreDest)) {
