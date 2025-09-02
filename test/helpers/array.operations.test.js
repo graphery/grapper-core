@@ -193,4 +193,23 @@ test.describe(name, () => {
 
   });
 
+  test('fixed $sum and $sumBefore conflict', () => {
+    const a = operations([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+    expect(a.$minBefore(5)).toBe(1);
+    expect(a.$min()).toBe(1);
+    expect(a.$maxBefore(5)).toBe(5);
+    expect(a.$max()).toBe(10);
+    expect(a.$countBefore(5)).toBe(5);
+    expect(a.$count()).toBe(10);
+    expect(a.$sumBefore(5)).toBe(1+2+3+4+5);
+    expect(a.$sum()).toBe(1+2+3+4+5+6+7+8+9+10);
+    expect(a.$avgBefore(5)).toBe((1+2+3+4+5)/5);
+    expect(a.$avg()).toBe((1+2+3+4+5+6+7+8+9+10)/10);
+    expect(a.$distinctBefore(5)).toStrictEqual([1,2,3,4,5]);
+    expect(a.$distinct()).toStrictEqual([1,2,3,4,5,6,7,8,9,10]);
+
+  });
+
+
 });

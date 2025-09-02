@@ -10,6 +10,7 @@ const define   = (obj, name, value) => Object.defineProperty(obj, name, {
   value
 });
 const getValue = (obj, prop) => prop === DIRECT ? obj : getProperty(obj, prop);
+const NOCACHE  = Symbol();
 
 /**
  * @typedef operators
@@ -54,10 +55,10 @@ export function operations (data = {}) {
     define(
       data,
       name,
-      (arr = undefined, prop = DIRECT) => {
+      (arr = undefined, prop = DIRECT, noCache) => {
         if (isString(arr) || isUndefined(arr)) {
           prop = arr || DIRECT;
-          if ((prop in cache[name])) {
+          if (!noCache && prop in cache[name]) {
             return cache[name][prop];
           }
           arr = data;
@@ -70,7 +71,7 @@ export function operations (data = {}) {
           return result === INITIAL ? value : op(result, value);
         }, isFunction(init) ? init() : init);
         result     = isFunction(finish) ? finish(result) : result;
-        if (data !== arr) {
+        if (!noCache && data !== arr) {
           cache[name][prop] = result
         }
         return result === init ? 0 : result;
@@ -79,7 +80,7 @@ export function operations (data = {}) {
     define(
       data,
       name + 'Before',
-      (num, prop) => data[name](data.slice(0, num), prop)
+      (num, prop) => data[name](data.slice(0, num), prop, NOCACHE)
     );
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "grapper-core",
-  "version": "1.0.0-beta.9",
+  "version": "1.0.0-beta.10",
   "description": "Core libs and helpers for Grapper projects",
   "author": "Graphery",
   "bugs": "https://github.com/graphery/grapper-core/issues",
