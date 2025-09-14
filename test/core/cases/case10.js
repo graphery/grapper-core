@@ -1,11 +1,11 @@
 export const title       = '10) CSS'
-export const description = `CSS properties and related functions`;
+export const description = `CSS properties and related functions with Extra class`;
 
 export async function script () {
-  const {Base, RENDER, define}                 = await import('/src/core/base.js');
+  const {Extra, RENDER, define}                 = await import('/src/core/extra.js');
   const {getCSSVar, getCSSPropertyDescriptors} = await import('/src/core/cssprops.js');
 
-  class MyComponent extends Base {
+  class MyComponent extends Extra {
 
     [RENDER] () {
       this.shadowRoot.innerHTML = `

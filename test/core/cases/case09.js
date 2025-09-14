@@ -1,10 +1,10 @@
 export const title       = '9) RESIZE'
-export const description = `Capture the resize`;
+export const description = `Capture the resize with Extra class`;
 
 export async function script () {
-  const { Base, RENDER, RESIZE, define } = await import('/src/core/base.js');
+  const { Extra, RENDER, RESIZE, define } = await import('/src/core/extra.js');
 
-  class MyComponent extends Base {
+  class MyComponent extends Extra {
 
     [ RENDER ] () {
       this.shadowRoot.innerHTML = `

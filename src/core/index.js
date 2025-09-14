@@ -1,3 +1,3 @@
-export * from './base.js';
+export * from './extra.js';
 export * from './cssprops.js';
 export * from './intersection.js';

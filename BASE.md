@@ -14,10 +14,10 @@ this kind of component and to make easier and more efficient the development of 
 - [Properties without attribute mirror](#properties-without-attribute-mirror)
 - [Private information](#private-information)
 - [Local DOM](#local-dom)
-- [Resize](#resize)
-- [CSS Custom property](#css-custom-property)
 - [Manages advanced life cycle](#manages-advanced-life-cycle)
 - [Create components without the user interface](#Create-components-without-the-user-interface)
+- [Resize](#resize-extra-class)
+- [CSS Custom property](#css-custom-property-extra-class)
 - [Quick reference](#quick-reference)
 
 ## Create a component from Base
@@ -496,126 +496,6 @@ invoked every time when is changed the local DOM content.
 </script>
 ```
 
-## Resize
-
-Sometimes it is important to know when has changed the size of the component to be able to adjust
-the content to the new size. This management can be easier if we import the symbol `RESIZE` and
-create a new method with this symbol. That method will be invoked when the size of the component has
-changed.
-
-<!-- case09 -->
-
-```html
-
-<div style="height: 300px; width: 300px; resize:both; overflow: hidden; border: 1px dotted black">
-  <g-my-component style="width: 100%; height: auto;" id="component" label="Hello"></g-my-component>
-</div>
-<p>Please resize the box</p>
-
-
-<script type="module">
-  import { Base, RENDER, RESIZE, define } from '/src/core/base.js';
-
-  class MyComponent extends Base {
-
-    [RENDER] () {
-      this.shadowRoot.innerHTML = `
-        <style>
-          :host { display: block;}
-        </style>
-        <svg viewBox="0 0 200 100" width="100%" height="100">
-          <ellipse cx="100" cy="50" rx="100" ry="50" fill="blue"/>
-          <text x="50%" y="50%" text-anchor="middle" fill="white" dy="0.2em" font-size="20">
-            ${ this.label }
-          </text>
-        </svg>`;
-    }
-
-    [RESIZE] (width, height) {
-      const svg = this.shadowRoot.querySelector('svg');
-      svg.setAttribute('height', width / 2);
-    }
-  }
-
-  define(MyComponent)
-    .attribute({name : 'label', type : 'string', value : '', posUpdate : RENDER})
-    .tag('my-component');
-
-</script>
-```
-
-The `[ RESIZE ]` method receive as parameters:
-
-- `width` - The new width
-- `height` - The new height
-- `widthDiff` - the difference between last width and current width
-- `heightDiff` - the difference between last height and current height
-
-## CSS Custom property
-
-You can define a CSS Properties with `define().style()`. After this definition is possible to import
-and use these functions:
-
-- `getCSSVar(component, name)`: Obtain a CSS var() string with the default value defined
-- `getCSSProperties(component)`: Get the list of CSS Properties Keys
-- `getCSSPropertyDescriptors(component)`: Get an object with the property Descriptors
-- `getCSSPropertyValue(component)`: Get a CSS Property Value  (current or default value)
-- `getCSSProperty(component, name)`: Get a CSS property descriptor by name
-
-<!-- case10 -->
-
-```html
-
-<g-my-component id="component"></g-my-component>
-<p>
-  <button id="check">get CSS properties</button>
-</p>
-<pre id="result"></pre>
-
-<script type="module">
-  import { Base, RENDER, define }                 from '/src/core/base.js';
-  import { getCSSVar, getCSSPropertyDescriptors } from '/src/core/cssprops.js';
-
-  class MyComponent extends Base {
-
-    [RENDER] () {
-      this.shadowRoot.innerHTML = `
-            <style>
-            :host {
-                display: block;
-                width: 64px;
-                height: 64px;
-                background-color: ${ getCSSVar(this, 'bg-color') };
-                color: ${ getCSSVar(this, 'fg-color') };
-            }
-            </style>
-            G
-        `;
-    }
-  }
-
-  define(MyComponent)
-    .style({name : 'bg-color', initialValue : 'red'})
-    .style({name : 'fg-color', initialValue : 'white'})
-    .tag('my-component');
-
-  const component = document.querySelector('#component');
-  const result    = document.querySelector('#result');
-  const check     = document.querySelector('#check');
-  check.addEventListener('click', () => {
-    const descriptors = getCSSPropertyDescriptors(component);
-    result.innerHTML  = JSON.stringify(descriptors, null, 2).replaceAll('<', '&lt;');
-  });
-
-
-</script>
-```
-
-The user can define `--g-bg-color` as a CSS variable to define the component background color.
-
-**Note**: the `--g-` prefix is included automatically when a CSS custom property is defined by
-`.style()`.
-
 ## Manages advanced life cycle
 
 In some situations, it's possible that the cycle of life as it is defined may not be suitable. In
@@ -634,7 +514,6 @@ from a remote server.
 <!-- case11 -->
 
 ```html
-
 <g-my-component delay="4"></g-my-component>
 
 <script type="module">
@@ -716,6 +595,124 @@ You can use `define().attr()`, `define().prop()` and `define().tag()` with class
     .tag('my-component');
 </script>
 ```
+
+## Resize (Extra class)
+
+Sometimes it is important to know when it has changed the size of the component to be able to adjust
+the content to the new size. This management can be easier with `Extra` class and the symbol 
+`RESIZE`. You can create a method with this symbol. That method will be invoked when the size of the
+component has changed.
+
+<!-- case09 -->
+
+```html
+<div style="height: 300px; width: 300px; resize:both; overflow: hidden; border: 1px dotted black">
+  <g-my-component style="width: 100%; height: auto;" id="component" label="Hello"></g-my-component>
+</div>
+<p>Please resize the box</p>
+
+
+<script type="module">
+  import { Extra, RENDER, RESIZE, define } from '/src/core/extra.js';
+
+  class MyComponent extends Extra {
+
+    [RENDER] () {
+      this.shadowRoot.innerHTML = `
+        <style>
+          :host { display: block;}
+        </style>
+        <svg viewBox="0 0 200 100" width="100%" height="100">
+          <ellipse cx="100" cy="50" rx="100" ry="50" fill="blue"/>
+          <text x="50%" y="50%" text-anchor="middle" fill="white" dy="0.2em" font-size="20">
+            ${ this.label }
+          </text>
+        </svg>`;
+    }
+
+    [RESIZE] (width, height) {
+      const svg = this.shadowRoot.querySelector('svg');
+      svg.setAttribute('height', width / 2);
+    }
+  }
+
+  define(MyComponent)
+    .attribute({name : 'label', type : 'string', value : '', posUpdate : RENDER})
+    .tag('my-component');
+
+</script>
+```
+
+The `[ RESIZE ]` method receive as parameters:
+
+- `width` - The new width
+- `height` - The new height
+- `widthDiff` - the difference between last width and current width
+- `heightDiff` - the difference between last height and current height
+
+## CSS Custom property (Extra class)
+
+You can define a CSS Properties with `Extra` class and `define().style()`. After this definition it
+is possible to import and use these functions:
+
+- `getCSSVar(component, name)`: Obtain a CSS var() string with the default value defined
+- `getCSSProperties(component)`: Get the list of CSS Properties Keys
+- `getCSSPropertyDescriptors(component)`: Get an object with the property Descriptors
+- `getCSSPropertyValue(component)`: Get a CSS Property Value  (current or default value)
+- `getCSSProperty(component, name)`: Get a CSS property descriptor by name
+
+<!-- case10 -->
+
+```html
+<g-my-component id="component"></g-my-component>
+<p>
+  <button id="check">get CSS properties</button>
+</p>
+<pre id="result"></pre>
+
+<script type="module">
+  import { Extra, RENDER, define }                 from '/src/core/extra.js';
+  import { getCSSVar, getCSSPropertyDescriptors } from '/src/core/cssprops.js';
+
+  class MyComponent extends Extra {
+
+    [RENDER] () {
+      this.shadowRoot.innerHTML = `
+            <style>
+            :host {
+                display: block;
+                width: 64px;
+                height: 64px;
+                background-color: ${ getCSSVar(this, 'bg-color') };
+                color: ${ getCSSVar(this, 'fg-color') };
+            }
+            </style>
+            G
+        `;
+    }
+  }
+
+  define(MyComponent)
+    .style({name : 'bg-color', initialValue : 'red'})
+    .style({name : 'fg-color', initialValue : 'white'})
+    .tag('my-component');
+
+  const component = document.querySelector('#component');
+  const result    = document.querySelector('#result');
+  const check     = document.querySelector('#check');
+  check.addEventListener('click', () => {
+    const descriptors = getCSSPropertyDescriptors(component);
+    result.innerHTML  = JSON.stringify(descriptors, null, 2).replaceAll('<', '&lt;');
+  });
+  
+</script>
+```
+
+The user can define `--g-bg-color` as a CSS variable to define the component background color.
+
+**Note**: the `--g-` prefix is included automatically when a CSS custom property is defined by
+`.style()`.
+
 
 ## Quick reference
 

@@ -50,26 +50,14 @@ const ONDISCONNECT = Symbol();
  * is changed and REFRESH is defined as pos update action.
  * @type {symbol}
  */
-const REFRESH   = Symbol();
+const REFRESH = Symbol();
 /**
  * Symbol used for defines the render method into the class inherited from Base
  * This method is called when the component is created and when some property
  * is changed and RENDER is define as pos update action.
  * @type {symbol}
  */
-const RENDER    = Symbol();
-/**
- * Symbol used for defines the resize method into the class inherited from Base.
- * This method is called when the component is resized.
- * @type {symbol}
- */
-const RESIZE    = Symbol();
-/**
- * Symbol used for defines the map with CSS properties info.
- * @type {symbol}
- */
-const CSS_PROPS = Symbol();
-
+const RENDER  = Symbol();
 
 /**
  * Executes an array of callback functions associated with a given key on an element.
@@ -151,27 +139,6 @@ class Base extends Simple {
    * @private
    */
   connectedCallback () {
-    let reference     = this.getBoundingClientRect();
-    let flexDirection = getComputedStyle(this).flexDirection; // Specific for Icon class
-    const resize      = () => {
-      let {width : currentWidth, height : currentHeight} = this.getBoundingClientRect();
-      let currentFlexDirection                           = getComputedStyle(this).flexDirection;
-      if (currentWidth !== reference.width || currentHeight !== reference.height || currentFlexDirection !== flexDirection) {
-        if (isFunction(this[RESIZE])) {
-          this[RESIZE](
-            currentWidth,
-            currentHeight,
-            currentWidth - reference.width,
-            currentHeight - reference.height
-          );
-        }
-        reference     = {width : currentWidth, height : currentHeight};
-        flexDirection = currentFlexDirection;
-        this[FIRE_EVENT]('resize', reference);
-      }
-      this [CONTEXT]._resizeObserver = window.requestAnimationFrame(resize);
-    };
-    resize();
     runCallbacks(this, ONCONNECT);
   }
 
@@ -181,7 +148,6 @@ class Base extends Simple {
    * @private
    */
   disconnectedCallback () {
-    window.cancelAnimationFrame(this [CONTEXT]._resizeObserver);
     runCallbacks(this, ONDISCONNECT);
   }
 
@@ -203,40 +169,6 @@ Base.prototype[ONCONNECT] = [];
  */
 Base.prototype[ONDISCONNECT] = [];
 
-
-/**
- *
- * Property descriptor used into defineProperty
- *
- * @typedef {Object} cssPropertyDescriptor
- * @property {string}  name              - custom property name
- * @property {string}  [syntax='']       - syntax of the custom property
- * @property {string}  [initialValue=''] - initial value
- * @property {string}  [value='']        - initial value (alias)
- * @property {boolean} [inherits=false]  - inherit
- */
-
-/**
- *
- * Define a CSS property into the class
- *
- * @param {Function} Class            - class to extend
- * @param {cssPropertyDescriptor} def - options into a {@link cssPropertyDescriptor}
- */
-function defineStyleProperty (Class, def) {
-  const definition = {
-    name         : def.name.startsWith('--') ?
-      def.name :
-      `--${ def.name }`,
-    initialValue : def.initialValue ?? def.value ?? '',
-    syntax       : def.syntax ?? '*',
-    inherits     : def.inherits ?? true
-  };
-  if (!Class.prototype[CSS_PROPS]) {
-    Class.prototype[CSS_PROPS] = {};
-  }
-  Class.prototype[CSS_PROPS][definition.name] = definition;
-}
 
 /**
  *
@@ -303,17 +235,12 @@ function defineComponent (Class) {
 /**
  * Define a Base or
  * @param {Function} Class
+ * @param {object} [def={}]
  * @returns {object}
  */
-function define (Class) {
+function define (Class, def = {}) {
   defineComponent(Class);
-  const def = defineSimple(Class, {
-    style : (...styles) => {
-      styles.forEach(style => defineStyleProperty(Class, {...style}));
-      return def;
-    }
-  });
-  return def;
+  return defineSimple(Class, def);
 }
 
 Base.RENDER       = RENDER;
@@ -333,8 +260,6 @@ export {
   REFRESH,
   CHANGE,
   CONTEXT,
-  RESIZE,
-  CSS_PROPS,
   FIRE_EVENT,
   ONCONNECT,
   ONDISCONNECT
