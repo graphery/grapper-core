@@ -25,7 +25,7 @@
     "@playwright/test": "^1.55.0",
     "concurrently": "^9.2.1",
     "playwright": "^1.55.0",
-    "grapper-workbench": "^0.0.3",
+    "grapper-workbench": "^0.0.4",
     "grapper-packer": "^0.0.3"
   },
   "keywords": [
